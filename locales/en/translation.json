@@ -1,0 +1,17 @@
+{
+  "title": "MD then Share",
+  "share_markdown": "Share Markdown",
+  "upload_title": "Upload a .md file",
+  "paste_title": "Or paste your markdown here",
+  "generate_link": "Generate Link",
+  "error_no_content": "Please upload a file or paste some text.",
+  "error_unexpected": "An unexpected error occurred.",
+  "share_link_title": "Share this link:",
+  "view_markdown_title": "View Markdown",
+  "admin_panel_title": "Admin Panel",
+  "table_id": "ID",
+  "table_filename": "Original Filename",
+  "table_created_at": "Created At",
+  "table_actions": "Actions",
+  "btn_delete": "Delete"
+}

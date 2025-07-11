@@ -1,0 +1,17 @@
+{
+  "title": "即刻分享 Markdown",
+  "share_markdown": "分享 Markdown",
+  "upload_title": "上传 .md 文件",
+  "paste_title": "或在此处粘贴 Markdown 文本",
+  "generate_link": "生成链接",
+  "error_no_content": "请上传文件或粘贴文本.",
+  "error_unexpected": "发生了未知错误.",
+  "share_link_title": "分享此链接:",
+  "view_markdown_title": "查看 Markdown",
+  "admin_panel_title": "管理面板",
+  "table_id": "ID",
+  "table_filename": "原始文件名",
+  "table_created_at": "创建于",
+  "table_actions": "操作",
+  "btn_delete": "删除"
+}

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= i18n.language %>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title><%= t('admin_panel_title') %></title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Admin Panel</h1>
+        <h1><%= t('admin_panel_title') %></h1>
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Original Filename</th>
-                    <th>Created At</th>
-                    <th>Actions</th>
+                    <th><%= t('table_id') %></th>
+                    <th><%= t('table_filename') %></th>
+                    <th><%= t('table_created_at') %></th>
+                    <th><%= t('table_actions') %></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +26,7 @@
                         <td><%= new Date(file.createdAt).toLocaleString() %></td>
                         <td>
                             <form action="/admin/delete/<%= file.id %>" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger"><%= t('btn_delete') %></button>
                             </form>
                         </td>
                     </tr>

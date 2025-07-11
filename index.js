@@ -4,9 +4,27 @@ const { marked } = require('marked');
 const fs = require('fs/promises');
 const path = require('path');
 const { nanoid } = require('nanoid');
+const i18next = require('i18next');
+const i18nextFsBackend = require('i18next-fs-backend');
+const i18nextHttpMiddleware = require('i18next-http-middleware');
 
 const app = express();
 const port = 3000;
+
+// --- i18n Configuration ---
+i18next
+    .use(i18nextFsBackend)
+    .use(i18nextHttpMiddleware.LanguageDetector)
+    .init({
+        fallbackLng: 'en',
+        backend: {
+            loadPath: path.join(__dirname, 'locales', '{{lng}}', 'translation.json'),
+        },
+        detection: {
+            order: ['header'], // Detect language from 'Accept-Language' header
+            caches: false
+        }
+    });
 
 // --- Configuration ---
 const UPLOADS_DIR = path.join(__dirname, 'data', 'uploads');
@@ -14,6 +32,7 @@ const DB_PATH = path.join(__dirname, 'data', 'db.json');
 
 // --- Middleware ---
 app.set('view engine', 'ejs');
+app.use(i18nextHttpMiddleware.handle(i18next));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
@@ -65,7 +84,7 @@ app.post('/upload', upload.single('mdfile'), async (req, res) => {
             const content = req.body.mdtext;
             await fs.writeFile(path.join(UPLOADS_DIR, `${id}.md`), content);
         } else {
-            return res.render('index', { error: 'Please upload a file or paste some text.' });
+            return res.render('index', { error: req.t('error_no_content') });
         }
 
         const db = await readDb();
@@ -81,7 +100,7 @@ app.post('/upload', upload.single('mdfile'), async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).render('index', { error: 'An unexpected error occurred.' });
+        res.status(500).render('index', { error: req.t('error_unexpected') });
     }
 });
 
@@ -91,7 +110,7 @@ app.get('/view/:id', async (req, res) => {
         const filePath = path.join(UPLOADS_DIR, `${id}.md`);
         const markdown = await fs.readFile(filePath, 'utf8');
         const content = marked(markdown);
-        res.render('view', { content });
+        res.render('view', { content, t: req.t });
     } catch (error) {
         console.error(error);
         res.status(404).send('Not Found');
@@ -103,7 +122,7 @@ app.get('/admin', async (req, res) => {
         const files = await readDb();
         // Sort by most recent first
         files.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        res.render('admin', { files });
+        res.render('admin', { files, t: req.t });
     } catch (error) {
         console.error(error);
         res.status(500).send('Error reading database');
