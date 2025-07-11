@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Original Filename</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% files.forEach(file => { %>
+                    <tr>
+                        <td><a href="/view/<%= file.id %>" target="_blank"><%= file.id %></a></td>
+                        <td><%= file.originalname %></td>
+                        <td><%= new Date(file.createdAt).toLocaleString() %></td>
+                        <td>
+                            <form action="/admin/delete/<%= file.id %>" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
