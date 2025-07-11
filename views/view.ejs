@@ -4,10 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= t('view_markdown_title') %></title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
 </head>
 <body class="markdown-body">
-    <%- content %>
+
+    <div class="reader-settings">
+        <div class="setting-group">
+            <button id="font-size-minus" class="control-btn" title="Decrease font size">A-</button>
+            <button id="font-size-plus" class="control-btn" title="Increase font size">A+</button>
+        </div>
+        <div class="setting-group">
+            <button class="theme-btn" data-theme="light" title="Light Theme"></button>
+            <button class="theme-btn" data-theme="sepia" title="Sepia Theme"></button>
+            <button class="theme-btn" data-theme="dark" title="Dark Theme"></button>
+        </div>
+    </div>
+
+    <article>
+        <%- content %>
+    </article>
+
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script src="/js/theme.js"></script>
 </body>
 </html>

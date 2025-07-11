@@ -1,54 +1,98 @@
-/* General Body Styles */
+/* ==========================================================================
+   1. Base & Variables
+   ========================================================================== */
+
+:root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-serif: 'Noto Serif', Georgia, serif;
+
+    /* Light Theme (Default) */
+    --color-bg: #f8f9fa;
+    --color-text: #212529;
+    --color-text-muted: #6c757d;
+    --color-primary: #0d6efd;
+    --color-surface: #ffffff;
+    --color-border: #dee2e6;
+    --color-code-bg: #e9ecef;
+}
+
+.theme-dark {
+    --color-bg: #121212;
+    --color-text: #e0e0e0;
+    --color-text-muted: #a0a0a0;
+    --color-primary: #4dabf7;
+    --color-surface: #1e1e1e;
+    --color-border: #333333;
+    --color-code-bg: #2c2c2c;
+}
+
+.theme-sepia {
+    --color-bg: #f4f0e8;
+    --color-text: #5b4636;
+    --color-text-muted: #8d6e63;
+    --color-primary: #8c5e4a;
+    --color-surface: #fdfaf3;
+    --color-border: #dcd1c0;
+    --color-code-bg: #e9e2d5;
+}
+
+
+/* ==========================================================================
+   2. General Styles
+   ========================================================================== */
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
     margin: 0;
-    padding: 20px;
 }
 
 .container {
     max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
+    margin: 2rem auto;
+    background: var(--color-surface);
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border);
 }
 
-/* Header Styles */
-h1, h2, h3 {
-    color: #0056b3;
-    border-bottom: 2px solid #eeeeee;
-    padding-bottom: 10px;
-}
+/* ==========================================================================
+   3. Form & UI Elements
+   ========================================================================== */
 
-/* Form Styles */
 textarea {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-text);
     margin-bottom: 10px;
     min-height: 200px;
     box-sizing: border-box;
+    font-family: var(--font-sans);
 }
 
 .btn {
     display: inline-block;
-    background-color: #007bff;
+    background-color: var(--color-primary);
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
 }
 
 .btn-danger {
@@ -59,71 +103,128 @@ textarea {
     background-color: #c82333;
 }
 
-/* Markdown Content Styles */
+/* ==========================================================================
+   4. Markdown Reading View (.markdown-body)
+   ========================================================================== */
+
 .markdown-body {
+    background-color: var(--color-surface);
+    color: var(--color-text);
     box-sizing: border-box;
-    min-width: 200px;
-    max-width: 980px;
+    max-width: 800px; /* Optimal reading width */
     margin: 0 auto;
-    padding: 45px;
+    padding: 3rem 4rem;
+    font-family: var(--font-serif); /* Default to serif for reading */
+    font-size: 1.1rem;
+    line-height: 1.8;
+    transition: all 0.3s ease; /* Smooth transition for font-size and colors */
 }
 
-.markdown-body h1, .markdown-body h2 {
-    border-bottom: 1px solid #eaecef;
-    padding-bottom: .3em;
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    font-family: var(--font-sans); /* Sans-serif for titles */
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.markdown-body h1 { font-size: 2.5em; } /* Use em for scalability */
+.markdown-body h2 { font-size: 2em; }
+.markdown-body h3 { font-size: 1.75em; }
+
+.markdown-body p {
+    margin-bottom: 1.5rem;
+}
+
+.markdown-body a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: border-bottom-color 0.2s ease-in-out;
+    border-bottom: 1px solid transparent;
+}
+
+.markdown-body a:hover {
+    border-bottom-color: var(--color-primary);
+}
+
+.markdown-body blockquote {
+    margin: 1.5rem 0;
+    padding: 0.5rem 1.5rem;
+    color: var(--color-text-muted);
+    border-left: 0.25rem solid var(--color-border);
+    background-color: var(--color-bg);
+    border-radius: 0 5px 5px 0;
+}
+
+.markdown-body blockquote p:last-child {
+    margin-bottom: 0;
 }
 
 .markdown-body code {
+    font-family: var(--font-sans);
+    background-color: var(--color-code-bg);
+    color: var(--color-text);
     padding: .2em .4em;
     margin: 0;
     font-size: 85%;
-    background-color: rgba(27,31,35,.05);
     border-radius: 3px;
 }
 
 .markdown-body pre {
-    padding: 16px;
-    overflow: auto;
-    font-size: 85%;
+    font-family: var(--font-sans);
+    background-color: var(--color-code-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
     line-height: 1.45;
-    background-color: #f6f8fa;
-    border-radius: 3px;
 }
 
 .markdown-body pre code {
-    display: inline;
-    max-width: auto;
+    background: none;
     padding: 0;
-    margin: 0;
-    overflow: visible;
-    line-height: inherit;
-    word-wrap: normal;
-    background-color: transparent;
-    border: 0;
+    font-size: 100%;
 }
 
-.markdown-body blockquote {
-    padding: 0 1em;
-    color: #6a737d;
-    border-left: .25em solid #dfe2e5;
+.markdown-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
 
 .markdown-body table {
-    display: block;
     width: 100%;
-    overflow: auto;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
-.markdown-body th, .markdown-body td {
-    padding: 6px 13px;
-    border: 1px solid #dfe2e5;
+.markdown-body th,
+.markdown-body td {
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+    text-align: left;
 }
 
 .markdown-body th {
-    font-weight: 600;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    background-color: var(--color-bg);
 }
 
-/* Admin Table */
+/* ==========================================================================
+   5. Admin Table
+   ========================================================================== */
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -131,11 +232,74 @@ textarea {
 }
 
 .table th, .table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid var(--color-border);
+    padding: 12px 15px;
     text-align: left;
 }
 
 .table th {
-    background-color: #f2f2f2;
+    background-color: var(--color-bg);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   6. Reader Settings
+   ========================================================================== */
+
+.reader-settings {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 50px;
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.setting-group {
+    display: flex;
+    gap: 5px;
+}
+
+.control-btn, .theme-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    cursor: pointer;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover, .theme-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-primary);
+}
+
+.theme-btn[data-theme="light"] { background-color: #ffffff; }
+.theme-btn[data-theme="sepia"] { background-color: #f4f0e8; }
+.theme-btn[data-theme="dark"]  { background-color: #1e1e1e; }
+
+
+@media (max-width: 768px) {
+    .markdown-body {
+        padding: 2rem 1.5rem;
+        font-size: 1rem;
+    }
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    .reader-settings {
+        bottom: 10px;
+        right: 10px;
+    }
 }
