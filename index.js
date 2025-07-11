@@ -1,12 +1,17 @@
-const express = require('express');
-const multer = require('multer');
-const { marked } = require('marked');
-const fs = require('fs/promises');
-const path = require('path');
-const { nanoid } = require('nanoid');
-const i18next = require('i18next');
-const i18nextFsBackend = require('i18next-fs-backend');
-const i18nextHttpMiddleware = require('i18next-http-middleware');
+import express from 'express';
+import multer from 'multer';
+import { marked } from 'marked';
+import fs from 'fs/promises';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { nanoid } from 'nanoid';
+import i18next from 'i18next';
+import i18nextFsBackend from 'i18next-fs-backend';
+import i18nextHttpMiddleware from 'i18next-http-middleware';
+
+// --- ESM __dirname polyfill ---
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const port = 3000;

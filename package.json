@@ -13,7 +13,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/syhien/md-then-share/issues"
   },
@@ -24,8 +24,8 @@
     "i18next": "^25.3.2",
     "i18next-fs-backend": "^2.6.0",
     "i18next-http-middleware": "^3.7.4",
-    "marked": "^4.3.0",
+    "marked": "^16.0.0",
     "multer": "^2.0.1",
-    "nanoid": "^3.3.11"
+    "nanoid": "^5.1.5"
   }
 }
