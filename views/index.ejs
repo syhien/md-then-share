@@ -9,10 +9,14 @@
 <body>
     <div class="container">
         <h1><%= t('share_markdown') %></h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
             <div>
                 <h3><%= t('upload_title') %></h3>
-                <input type="file" name="mdfile" accept=".md,.markdown">
+                <div id="drop-zone">
+                    <p><%= t('drop_zone_text') %></p>
+                    <input type="file" name="mdfile" id="file-input" accept=".md,.markdown" hidden>
+                    <p id="file-name"></p>
+                </div>
             </div>
             <hr>
             <div>
@@ -33,5 +37,6 @@
             </div>
         <% } %>
     </div>
+    <script src="/js/upload.js"></script>
 </body>
 </html>

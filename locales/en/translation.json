@@ -13,5 +13,6 @@
   "table_filename": "Original Filename",
   "table_created_at": "Created At",
   "table_actions": "Actions",
-  "btn_delete": "Delete"
+  "btn_delete": "Delete",
+  "drop_zone_text": "Drag & drop a file here or click to select a file"
 }
