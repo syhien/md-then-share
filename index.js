@@ -8,6 +8,7 @@ import { nanoid } from 'nanoid';
 import i18next from 'i18next';
 import i18nextFsBackend from 'i18next-fs-backend';
 import i18nextHttpMiddleware from 'i18next-http-middleware';
+import compression from 'compression';
 
 // --- ESM __dirname polyfill ---
 const __filename = fileURLToPath(import.meta.url);
@@ -37,8 +38,9 @@ const DB_PATH = path.join(__dirname, 'data', 'db.json');
 
 // --- Middleware ---
 app.set('view engine', 'ejs');
+app.use(compression()); // Enable Gzip compression
 app.use(i18nextHttpMiddleware.handle(i18next));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1y' })); // Cache static assets for 1 year
 app.use(express.urlencoded({ extended: true }));
 
 // Multer setup for file uploads
