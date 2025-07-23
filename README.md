@@ -46,15 +46,15 @@ A simple web service to quickly upload, render, and share Markdown files.
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18+ recommended)
-- [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install/)
+- [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install/) (for containerized deployment)
 
-### Option 1: Running with Docker (Recommended)
+### Running with Docker (Recommended)
 
 This is the easiest way to get the service running.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/md-then-share.git
+    git clone https://github.com/syhien/md-then-share.git
     cd md-then-share
     ```
 
@@ -68,21 +68,32 @@ This is the easiest way to get the service running.
 
 The `data` directory is mounted as a volume, so your uploaded files and database will persist even if you stop or restart the container.
 
-### Option 2: Running Locally with Node.js
+### Running with Node.js
 
-1.  **Clone the repository and install dependencies:**
+For users who prefer not to use Docker.
+
+1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/md-then-share.git
+    git clone https://github.com/syhien/md-then-share.git
     cd md-then-share
+    ```
+
+2.  **Install dependencies:**
+    ```bash
     npm install
     ```
 
-2.  **Start the server:**
+3.  **Start the server:**
+    For development, simply run:
     ```bash
-    node index.js
+    npm start
+    ```
+    For a production-like environment, set the `NODE_ENV` variable:
+    ```bash
+    NODE_ENV=production npm start
     ```
 
-3.  **Access the application:**
+4.  **Access the application:**
     Open your browser and navigate to `http://localhost:3000`.
 
 ## How to Use
